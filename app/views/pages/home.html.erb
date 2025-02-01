@@ -1,0 +1,41 @@
+<% if user_signed_in? %>
+  <h1>Welcome, <%= current_user.nombre %> <%= current_user.apellido %>!</h1>
+
+  <div class="flex justify-center mt-6">
+    <%= link_to "My Friends", my_friends_path, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+  <div class="flex flex-col mb-4 mt-4 p-4 border-2 border-gray-300 rounded-lg shadow-lg space-x-4">
+   <%= render 'add_friends_list' %> <!-- Render the friends list -->
+  </div>
+
+  <div class="flex flex-col mb-4 mt-4 p-4 border-2 border-gray-300 rounded-lg shadow-lg space-x-4">
+    <div class="flex items-start flex-col gap-4 mb-4 mt-4">
+      <h3 class="font-bold text-center my-6">Recent Posts</h3>
+      <div class="flex gap-4 mb-4">
+        <!-- Button to create new post -->
+        <%= link_to "New Post", new_post_path, class: "mt-3 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+
+        <!-- View all posts -->
+        <%= link_to "My Posts", posts_path, class: "mt-3 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+      </div>
+    </div>
+    <div class="posts-list">
+      <% @posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex justify-center gap-4 mb-4 mt-4">
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete}, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %><br />
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+<% else %>
+  <h1>¡Welcome, Visitors!</h1>
+  <p>Please, <b>log in</b> to continue.</p>
+  <div class="flex justify-center gap-4 mt-6">
+   <%= link_to "Sign Up", new_user_registration_path, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+   <%= link_to "Sign In", new_user_session_path, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<% content_for :title, "Editing post" %>
+
+<h1>Editing post</h1>
+
+<%= render "form", post: @post %>
+
+<br>
+
+<div class="flex gap-4 mt-4 items-start justify-center">
+  <div class="w-full flex gap-4 mt-4 items-start justify-center">
+    <%= link_to "Back", posts_path, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+    <%= link_to "Show", @post, class: "px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" %>
+
+  </div>
+</div>

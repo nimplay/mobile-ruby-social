@@ -1,0 +1,30 @@
+<h1 class="text-3xl font-bold text-center my-6">My Friends</h1>
+
+<% if @friends.any? %>
+  <ul class="flex flex-col space-y-4 gap-4 ">
+    <% @friends.each do |friend| %>
+      <li class="bg-white shadow-md rounded-lg p-4 flex items-center justify-between">
+        <div class="flex flex-col  items-center">
+          <% if friend.profile_pic.present? %>
+             <div class="w-30 h-30 overflow-hidden border-2 border-gray-300 shadow-md" style="border-radius: 50%;">
+              <%= image_tag "user.png", alt: "Default Profile Picture", class: "w-full h-full object-cover" %>
+            </div>
+          <% else %>
+            <div class="w-30 h-30 overflow-hidden border-2 border-gray-300 shadow-md" style="border-radius: 50%;">
+              <%= image_tag "user.png", alt: "Default Profile Picture", class: "w-full h-full object-cover" %>
+            </div>
+            <% end %>
+          <p class="ml-4 text-lg font-medium"><%= friend.username %></p>
+        </div>
+
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-center text-gray-500">You don't have any friends yet.</p>
+<% end %>
+<div class="flex flex-col mb-4 mt-4 p-4 border-2 border-gray-300 rounded-lg shadow-lg space-x-4">
+   <%= render 'pages/add_friends_list' %> <!-- Render the friends list -->
+  </div>
+</div>
+

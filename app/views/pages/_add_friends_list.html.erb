@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "users_list" do %>
+  <div class="flex flex-col justify-center gap-4 mt-6">
+    <h1 class="text-3xl font-bold mb-5">Add Friends</h1>
+
+    <div class="flex gap-4 mx-auto max-w-4xl">
+      <% @users.each do |user| %>
+        <div class="flex-col bg-white shadow-md rounded-lg p-6 flex items-center w-[220px]">
+          <div class="flex gap-4 mb-4">
+            <% if user.profile_pic.present? %>
+              <div class="w-24 h-24 border-2 border-gray-300 shadow-md rounded-full overflow-hidden">
+                <%= image_tag "user.png", alt: "Default Profile Picture", class: "w-full h-full object-cover" %>
+              </div>
+            <% else %>
+              <div class="w-24 h-24 border-2 border-gray-300 shadow-md rounded-full overflow-hidden">
+                <%= image_tag "user.png", alt: "Default Profile Picture", class: "w-full h-full object-cover" %>
+              </div>
+            <% end %>
+          </div>
+          <p class="text-lg font-medium mt-2"><%= user.username %></p>
+
+          <%= turbo_frame_tag "user_#{user.id}_friend_button" do %>
+            <%= button_to 'Add Friend', friends_path(friend_id: user.id), method: :post, class: "mt-3 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700" %>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+    <!-- Paginación -->
+<div class="flex justify-center my-4">
+  <div class="w-full flex flex-wrap justify-center gap-2 px-4">
+    <%= paginate @users, remote: true, class: "flex flex-wrap gap-2 text-sm sm:text-base" %>
+  </div>
+</div>
+  </div>
+<% end %>
